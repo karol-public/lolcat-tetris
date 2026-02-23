@@ -12,36 +12,29 @@
 <body>
     <div id="game-container">
         <h1 class="meme-text">LOLCAT TETRIS</h1>
-        <div id="top-bar"
-            style="display:flex; justify-content: space-between; width: 100%; max-width: 300px; margin-bottom: 5px;">
-            <div id="info-panel"
-                style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
-                <div class="meme-text" style="font-size:clamp(16px, 4vw, 20px);">SCORE: <span id="score">0</span></div>
-                <div class="meme-text" style="font-size:clamp(16px, 4vw, 20px);">LEVEL: <span id="level">1</span></div>
+        <div id="top-bar">
+            <div id="info-panel">
+                <div class="meme-text">SCORE: <span id="score">0</span></div>
+                <div class="meme-text">LEVEL: <span id="level">1</span></div>
             </div>
-            <div id="next-piece-container" style="display: flex; flex-direction: column; align-items: center;">
+            <div id="next-piece-container">
                 <div class="meme-text" style="font-size:14px;">NEXT</div>
-                <canvas id="next-canvas" width="80" height="80"
-                    style="background:#000; border:2px solid #fff; box-shadow:none;"></canvas>
+                <canvas id="next-canvas" width="80" height="80"></canvas>
             </div>
         </div>
 
-        <div style="position: relative; max-width: 100vw; display: flex; justify-content: center;">
-            <canvas id="tetris-canvas" width="300" height="600"
-                style="max-width: 100%; max-height: 60vh; object-fit: contain; width: auto; height: auto;"></canvas>
-            <div id="pause-screen" class="hidden"
-                style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                <h2 class="meme-text" style="font-size: 36px;">PAUSED</h2>
-                <button id="resume-btn" class="meme-text" style="font-size:20px;">RESUME NAOO</button>
+        <div id="board-container">
+            <canvas id="tetris-canvas"></canvas>
+            <div id="pause-screen" class="overlay hidden">
+                <h2 class="meme-text">PAUSED</h2>
+                <button id="resume-btn" class="meme-text">RESUME NAOO</button>
             </div>
-            <div id="cat-popup" class="hidden"
-                style="position:absolute; top:20%; left:50%; transform:translateX(-50%); z-index:20; pointer-events:none;">
-                <img id="cat-popup-img" src=""
-                    style="width:200px; border:4px solid white; border-radius:10px; box-shadow:0 0 20px #ff3366;">
+            <div id="cat-popup" class="hidden">
+                <img id="cat-popup-img" src="">
             </div>
         </div>
 
-        <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <div id="controls-bar">
             <button id="start-btn" class="meme-text">PLAY NAOO</button>
             <button id="pause-btn" class="meme-text hidden">PAUSE</button>
         </div>
