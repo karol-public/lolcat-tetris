@@ -33,39 +33,53 @@ body {
     padding: 10px;
 }
 
-h1.meme-text {
-    font-size: clamp(24px, 6vw, 36px);
-    margin-bottom: 5px;
-    flex-shrink: 0;
-}
-
 #top-bar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     margin-bottom: 5px;
+    padding: 0 5px;
     flex-shrink: 0;
 }
 
-#info-panel {
+.top-col {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    font-size: clamp(16px, 4vw, 20px);
 }
 
-#next-piece-container {
-    display: flex;
-    flex-direction: column;
+.align-left {
+    align-items: flex-start;
+}
+
+.align-center {
     align-items: center;
+}
+
+.align-right {
+    align-items: flex-end;
+}
+
+.gap-sm {
+    gap: 5px;
+}
+
+.compact-title {
+    font-size: clamp(20px, 5vw, 24px);
+    margin: 0;
+    line-height: 1;
+}
+
+.stat-text {
+    font-size: clamp(14px, 4vw, 18px);
+    margin: 0;
+    line-height: 1.2;
 }
 
 #next-canvas {
     background: #000;
     border: 2px solid #fff;
     box-shadow: none;
-    width: 60px;
-    height: 60px;
 }
 
 #board-container {
@@ -93,25 +107,19 @@ h1.meme-text {
     object-fit: contain;
 }
 
-#controls-bar {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-    flex-shrink: 0;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: clamp(16px, 5vw, 24px);
+.small-action-btn {
+    padding: 5px 15px;
+    font-size: clamp(16px, 4vw, 20px);
     background-color: #ff3366;
     border: 3px solid #fff;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     transition: transform 0.1s;
+    margin: 0;
 }
 
-button:active {
+.small-action-btn:active {
     transform: scale(0.95);
 }
 

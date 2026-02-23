@@ -11,15 +11,24 @@
 
 <body>
     <div id="game-container">
-        <h1 class="meme-text">LOLCAT TETRIS</h1>
         <div id="top-bar">
-            <div id="info-panel">
-                <div class="meme-text">SCORE: <span id="score">0</span></div>
-                <div class="meme-text">LEVEL: <span id="level">1</span></div>
+            <!-- Stats & Title Column -->
+            <div class="top-col align-left">
+                <h1 class="meme-text compact-title">LOL TETRIS</h1>
+                <div class="meme-text stat-text">SCORE: <span id="score">0</span></div>
+                <div class="meme-text stat-text">LVL: <span id="level">1</span></div>
             </div>
-            <div id="next-piece-container">
-                <div class="meme-text" style="font-size:14px;">NEXT</div>
-                <canvas id="next-canvas" width="80" height="80"></canvas>
+
+            <!-- Next Piece Column -->
+            <div class="top-col align-center">
+                <div class="meme-text stat-text" style="margin-bottom:2px;">NEXT</div>
+                <canvas id="next-canvas" width="50" height="50"></canvas>
+            </div>
+
+            <!-- Controls Column -->
+            <div class="top-col align-right gap-sm">
+                <button id="start-btn" class="meme-text small-action-btn">PLAY</button>
+                <button id="pause-btn" class="meme-text small-action-btn hidden">PAUSE</button>
             </div>
         </div>
 
@@ -34,14 +43,11 @@
             </div>
         </div>
 
-        <div id="controls-bar">
-            <button id="start-btn" class="meme-text">PLAY NAOO</button>
-            <button id="pause-btn" class="meme-text hidden">PAUSE</button>
-        </div>
+
 
         <div id="game-over-screen" class="hidden">
             <h2 class="meme-text">OH NOES! DED!</h2>
-            <button id="restart-btn" class="meme-text">TRY AGAINZ</button>
+            <button id="restart-btn" class="meme-text small-action-btn">TRY AGAINZ</button>
         </div>
     </div>
 
