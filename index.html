@@ -12,23 +12,21 @@
 <body>
     <div id="game-container">
         <div id="top-bar">
-            <!-- Stats & Title Column -->
+            <!-- Stats Column -->
             <div class="top-col align-left">
-                <h1 class="meme-text compact-title">LOL TETRIS</h1>
                 <div class="meme-text stat-text">SCORE: <span id="score">0</span></div>
                 <div class="meme-text stat-text">LVL: <span id="level">1</span></div>
             </div>
 
-            <!-- Next Piece Column -->
+            <!-- Title Column -->
             <div class="top-col align-center">
-                <div class="meme-text stat-text" style="margin-bottom:2px;">NEXT</div>
-                <canvas id="next-canvas" width="50" height="50"></canvas>
+                <h1 class="meme-text compact-title">LOL TETRIS</h1>
             </div>
 
-            <!-- Controls Column -->
-            <div class="top-col align-right gap-sm">
-                <button id="start-btn" class="meme-text small-action-btn">PLAY</button>
-                <button id="pause-btn" class="meme-text small-action-btn hidden">PAUSE</button>
+            <!-- Next Piece Column -->
+            <div class="top-col align-right">
+                <div class="meme-text stat-text" style="margin-bottom:2px;">NEXT</div>
+                <canvas id="next-canvas" width="50" height="50"></canvas>
             </div>
         </div>
 
@@ -43,7 +41,13 @@
             </div>
         </div>
 
-
+        <div id="controls-bar"
+            style="display: flex; gap: 10px; margin-top: 10px; width: 100%; justify-content: center;">
+            <button id="start-btn" class="meme-text small-action-btn" style="flex-grow: 1; max-width: 200px;">PLAY
+                NAOO</button>
+            <button id="pause-btn" class="meme-text small-action-btn hidden"
+                style="flex-grow: 1; max-width: 200px;">PAUSE</button>
+        </div>
 
         <div id="game-over-screen" class="hidden">
             <h2 class="meme-text">OH NOES! DED!</h2>
