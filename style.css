@@ -6,12 +6,11 @@
 }
 
 body {
-    background-color: #222;
-    background-image: repeating-linear-gradient(45deg,
-            #ff9a9e 0,
-            #ff9a9e 40px,
-            #fecfef 40px,
-            #fecfef 80px);
+    background-color: #0b0c10;
+    background-image: url('img/bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -20,7 +19,7 @@ body {
     min-height: 100dvh;
     padding-bottom: env(safe-area-inset-bottom, 10px);
     /* iPhone safe area */
-    font-family: 'Anton', impact, sans-serif;
+    font-family: 'Orbitron', impact, sans-serif;
 }
 
 #game-container {
@@ -66,15 +65,22 @@ body {
 }
 
 .compact-title {
-    font-size: clamp(20px, 5vw, 24px);
+    font-family: 'Righteous', sans-serif;
+    font-size: clamp(20px, 5vw, 28px);
     margin: 0;
     line-height: 1;
+    color: #fff;
+    text-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366, 0 0 30px #ff3366;
 }
 
 .stat-text {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
     font-size: clamp(14px, 4vw, 18px);
     margin: 0;
     line-height: 1.2;
+    color: #fff;
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
 }
 
 #next-canvas {
@@ -108,20 +114,29 @@ body {
     object-fit: contain;
 }
 
-.small-action-btn {
-    padding: 5px 15px;
-    font-size: clamp(16px, 4vw, 20px);
-    background-color: #ff3366;
-    border: 3px solid #fff;
-    border-radius: 6px;
+.img-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    transition: transform 0.1s;
+    outline: none;
+    transition: transform 0.1s, filter 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
 }
 
-.small-action-btn:active {
-    transform: scale(0.95);
+.img-btn img {
+    width: 100%;
+    max-width: 150px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(255, 51, 102, 0.6);
+}
+
+.img-btn:active {
+    transform: scale(0.92);
+    filter: brightness(1.2);
 }
 
 #game-over-screen {
@@ -138,8 +153,10 @@ body {
 }
 
 #game-over-screen h2 {
+    font-family: 'Righteous', sans-serif;
     font-size: clamp(24px, 8vw, 40px);
-    color: #ff3366;
+    color: #fff;
+    text-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366;
     margin-bottom: 20px;
 }
 
@@ -159,7 +176,10 @@ body {
 }
 
 .overlay h2 {
+    font-family: 'Righteous', sans-serif;
     font-size: clamp(24px, 8vw, 36px);
+    color: #fff;
+    text-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366;
     margin-bottom: 15px;
 }
 

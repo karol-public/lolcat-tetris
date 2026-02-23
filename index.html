@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lolcat Tetris</title>
+    <title>Lolcat Tetris Redux</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Righteous&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -33,8 +34,7 @@
         <div id="board-container">
             <canvas id="tetris-canvas" width="300" height="600"></canvas>
             <div id="pause-screen" class="overlay hidden">
-                <h2 class="meme-text">PAUSED</h2>
-                <button id="resume-btn" class="meme-text">RESUME NAOO</button>
+                <button id="resume-btn" class="img-btn"><img src="img/resume_btn.png" alt="RESUME"></button>
             </div>
             <div id="cat-popup" class="hidden">
                 <img id="cat-popup-img" src="">
@@ -43,15 +43,13 @@
 
         <div id="controls-bar"
             style="display: flex; gap: 10px; margin-top: 10px; width: 100%; justify-content: center;">
-            <button id="start-btn" class="meme-text small-action-btn" style="flex-grow: 1; max-width: 200px;">PLAY
-                NAOO</button>
-            <button id="pause-btn" class="meme-text small-action-btn hidden"
-                style="flex-grow: 1; max-width: 200px;">PAUSE</button>
+            <button id="start-btn" class="img-btn"><img src="img/play_btn.png" alt="PLAY NAOO"></button>
+            <button id="pause-btn" class="img-btn hidden"><img src="img/pause_btn.png" alt="PAUSE"></button>
         </div>
 
         <div id="game-over-screen" class="hidden">
             <h2 class="meme-text">OH NOES! DED!</h2>
-            <button id="restart-btn" class="meme-text small-action-btn">TRY AGAINZ</button>
+            <button id="restart-btn" class="img-btn"><img src="img/retry_btn.png" alt="RETRY"></button>
         </div>
     </div>
 
