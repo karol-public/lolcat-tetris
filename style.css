@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    touch-action: none; /* Prevent scrolling while swiping */
+}
+
+body {
+    background-color: #222;
+    background-image: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Anton', impact, sans-serif;
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    position: relative;
+    padding: 10px;
+}
+
+.meme-text {
+    font-family: 'Anton', Impact, sans-serif;
+    color: white;
+    text-shadow: 
+        -2px -2px 0 #000,  
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+         0px  4px 0 #000;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+h1.meme-text {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+#info-panel {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+canvas {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 4px solid #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 24px;
+    background-color: #ff3366;
+    border: 3px solid #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: transform 0.1s;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+#game-over-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border: 4px solid #fff;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 10;
+}
+
+#game-over-screen h2 {
+    font-size: 40px;
+    color: #ff3366;
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none !important;
+}

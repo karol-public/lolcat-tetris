@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lolcat Tetris</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <h1 class="meme-text">LOLCAT TETRIS</h1>
+        <div id="info-panel">
+            <div class="meme-text">SCORE: <span id="score">0</span></div>
+            <div class="meme-text">LEVEL: <span id="level">1</span></div>
+        </div>
+        
+        <canvas id="tetris-canvas" width="300" height="600"></canvas>
+        
+        <button id="start-btn" class="meme-text">PLAY NAOO</button>
+        <div id="game-over-screen" class="hidden">
+            <h2 class="meme-text">OH NOES! DED!</h2>
+            <button id="restart-btn" class="meme-text">TRY AGAINZ</button>
+        </div>
+    </div>
+    
+    <script src="tetris.js"></script>
+    <script src="input.js"></script>
+    <script src="audio.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
