@@ -14,11 +14,12 @@ body {
             #fecfef 80px);
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    height: 100dvh;
-    /* use dynamic viewport height for mobile browsers */
-    overflow: hidden;
+    align-items: flex-start;
+    /* allow content to start at top so it doesn't clip if too tall */
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: env(safe-area-inset-bottom, 10px);
+    /* iPhone safe area */
     font-family: 'Anton', impact, sans-serif;
 }
 
@@ -86,14 +87,14 @@ body {
     position: relative;
     display: flex;
     justify-content: center;
-    height: 60vh;
-    /* Scalable height */
+    /* responsive scaler */
+    height: 55vh;
+    height: 55dvh;
     max-height: 600px;
-    /* absolute max */
     flex-grow: 1;
-    /* allow it to take up remaining space but not overflow */
+    flex-shrink: 1;
+    /* allow shrinking if controls need space */
     min-height: 0;
-    /* important for flex shrink */
 }
 
 #tetris-canvas {
