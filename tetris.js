@@ -24,8 +24,9 @@ const LOLCATS = [
 ];
 
 class Tetris {
-    constructor(ctx, scoreEl, levelEl, onGameOver) {
+    constructor(ctx, nextCtx, scoreEl, levelEl, onGameOver) {
         this.ctx = ctx;
+        this.nextCtx = nextCtx;
         this.scoreEl = scoreEl;
         this.levelEl = levelEl;
         this.onGameOver = onGameOver;
@@ -39,7 +40,7 @@ class Tetris {
         this.gameOver = false;
 
         // Spawn first piece
-        this.piece = this.randomPiece();
+        this.nextPiece = this.randomPiece();
         this.spawn();
     }
 
@@ -57,7 +58,22 @@ class Tetris {
         };
     }
 
+    drawNextPiece() {
+        if (!this.nextCtx) return;
+        this.nextCtx.clearRect(0, 0, this.nextCtx.canvas.width, this.nextCtx.canvas.height);
+        const bSize = 20; // 80 / 4 loosely
+        const m = this.nextPiece.matrix;
+        const offsetX = (4 - m[0].length) / 2;
+        const offsetY = (4 - m.length) / 2;
+
+        this.drawMatrix(m, { x: offsetX, y: offsetY }, this.nextCtx, bSize);
+    }
+
     spawn() {
+        this.piece = this.nextPiece;
+        this.nextPiece = this.randomPiece();
+        this.drawNextPiece();
+
         this.piece.pos.y = 0;
         this.piece.pos.x = Math.floor(COLS / 2) - Math.floor(this.piece.matrix[0].length / 2);
 
@@ -141,6 +157,22 @@ class Tetris {
         return false;
     }
 
+    hardDrop() {
+        let dropDistance = 0;
+        while (!this.collide()) {
+            this.piece.pos.y++;
+            dropDistance++;
+        }
+        this.piece.pos.y--; // step back up 1, to original valid spot
+
+        this.score += dropDistance * 2; // bonus points for hard drop
+        this.scoreEl.innerText = this.score;
+
+        this.merge();
+        this.spawn();
+        this.clearLines();
+    }
+
     clearLines() {
         let linesCleared = 0;
         outer: for (let y = this.grid.length - 1; y >= 0; --y) {
@@ -164,50 +196,80 @@ class Tetris {
         }
     }
 
-    drawMatrix(matrix, offset) {
+    drawMatrix(matrix, offset, targetCtx = this.ctx, bSize = this.BLOCK_SIZE, isGhost = false) {
+        targetCtx.save();
+        if (isGhost) targetCtx.globalAlpha = 0.3;
+
         matrix.forEach((row, y) => {
             row.forEach((value, x) => {
                 if (value !== 0) {
-                    this.ctx.fillStyle = LOLCATS[value];
-                    const px = (x + offset.x) * this.BLOCK_SIZE;
-                    const py = (y + offset.y) * this.BLOCK_SIZE;
-                    this.ctx.fillRect(px, py, this.BLOCK_SIZE, this.BLOCK_SIZE);
+                    targetCtx.fillStyle = LOLCATS[value];
+                    const px = (x + offset.x) * bSize;
+                    const py = (y + offset.y) * bSize;
+                    targetCtx.fillRect(px, py, bSize, bSize);
 
-                    this.ctx.strokeStyle = '#222';
-                    this.ctx.lineWidth = 2;
-                    this.ctx.strokeRect(px, py, this.BLOCK_SIZE, this.BLOCK_SIZE);
+                    targetCtx.strokeStyle = '#222';
+                    targetCtx.lineWidth = 2;
+                    targetCtx.strokeRect(px, py, bSize, bSize);
 
-                    // Simple face drawing for Lolcat theme
-                    this.ctx.fillStyle = '#fff';
-                    // ears
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(px + 4, py + 8);
-                    this.ctx.lineTo(px + 8, py + 4);
-                    this.ctx.lineTo(px + 12, py + 8);
-                    this.ctx.fill();
+                    if (!isGhost && bSize >= 20) {
+                        // Simple face drawing for Lolcat theme
+                        const scale = bSize / 30; // 30 is default BLOCK_SIZE
+                        targetCtx.fillStyle = '#fff';
 
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(px + 18, py + 8);
-                    this.ctx.lineTo(px + 22, py + 4);
-                    this.ctx.lineTo(px + 26, py + 8);
-                    this.ctx.fill();
+                        targetCtx.beginPath();
+                        targetCtx.moveTo(px + 4 * scale, py + 8 * scale);
+                        targetCtx.lineTo(px + 8 * scale, py + 4 * scale);
+                        targetCtx.lineTo(px + 12 * scale, py + 8 * scale);
+                        targetCtx.fill();
 
-                    // eyes
-                    this.ctx.fillStyle = '#000';
-                    this.ctx.fillRect(px + 8, py + 12, 4, 4);
-                    this.ctx.fillRect(px + 18, py + 12, 4, 4);
+                        targetCtx.beginPath();
+                        targetCtx.moveTo(px + 18 * scale, py + 8 * scale);
+                        targetCtx.lineTo(px + 22 * scale, py + 4 * scale);
+                        targetCtx.lineTo(px + 26 * scale, py + 8 * scale);
+                        targetCtx.fill();
 
-                    // nose
-                    this.ctx.fillStyle = '#ff6699';
-                    this.ctx.fillRect(px + 13, py + 18, 4, 3);
+                        targetCtx.fillStyle = '#000';
+                        targetCtx.fillRect(px + 8 * scale, py + 12 * scale, 4 * scale, 4 * scale);
+                        targetCtx.fillRect(px + 18 * scale, py + 12 * scale, 4 * scale, 4 * scale);
+
+                        targetCtx.fillStyle = '#ff6699';
+                        targetCtx.fillRect(px + 13 * scale, py + 18 * scale, 4 * scale, 3 * scale);
+                    }
                 }
             });
         });
+        targetCtx.restore();
+    }
+
+    collideGhost(pos) {
+        const m = this.piece.matrix;
+        for (let y = 0; y < m.length; ++y) {
+            for (let x = 0; x < m[y].length; ++x) {
+                if (m[y][x] !== 0 &&
+                    (this.grid[y + pos.y] && this.grid[y + pos.y][x + pos.x]) !== 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    getGhostPos() {
+        const ghostPos = { x: this.piece.pos.x, y: this.piece.pos.y };
+        while (!this.collideGhost({ x: ghostPos.x, y: ghostPos.y + 1 })) {
+            ghostPos.y++;
+        }
+        return ghostPos;
     }
 
     draw() {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         this.drawMatrix(this.grid, { x: 0, y: 0 });
+
+        const ghostPos = this.getGhostPos();
+        this.drawMatrix(this.piece.matrix, ghostPos, this.ctx, this.BLOCK_SIZE, true);
+
         this.drawMatrix(this.piece.matrix, this.piece.pos);
     }
 }

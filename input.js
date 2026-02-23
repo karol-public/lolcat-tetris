@@ -1,5 +1,5 @@
 class InputHandler {
-    constructor(element, onMoveLeft, onMoveRight, onRotate, onDrop) {
+    constructor(element, onMoveLeft, onMoveRight, onRotate, onDrop, onHardDrop) {
         this.element = element;
         this.startX = 0;
         this.startY = 0;
@@ -12,6 +12,7 @@ class InputHandler {
         this.onMoveRight = onMoveRight;
         this.onRotate = onRotate;
         this.onDrop = onDrop;
+        this.onHardDrop = onHardDrop;
 
         // touch
         this.element.addEventListener('touchstart', this.handleStart.bind(this), { passive: false });
@@ -25,6 +26,7 @@ class InputHandler {
             else if (e.key === 'ArrowRight') this.onMoveRight();
             else if (e.key === 'ArrowUp') this.onRotate();
             else if (e.key === 'ArrowDown') this.onDrop();
+            else if (e.key === ' ') this.onHardDrop();
         };
         window.addEventListener('keydown', this.keydownHandler);
     }
@@ -57,7 +59,7 @@ class InputHandler {
             this.startX = touch.clientX; // reset to allow continuous swiping fast
             this.lockY = true; // prevent down swipe if moving side
         } else if (diffY > this.threshold && !this.lockY && !this.lockX) {
-            this.onDrop();
+            this.onHardDrop();
             this.startY = touch.clientY;
             this.lockX = true;
         }
